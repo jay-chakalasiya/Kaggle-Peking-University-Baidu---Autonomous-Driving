@@ -58,8 +58,8 @@ class ImageLoader():
 train_pic_dir = "C:/Users/kench/Desktop/PKU_Data/train_images/"
 train_mask_dir = "C:/Users/kench/Desktop/PKU_Data/train_masks/"
 csv_path = "C:/Users/kench/Desktop/PKU_Data/train.csv"
-img_id = "ID_0db53ef6d"
-
+#img_id = "ID_0db53ef6d"
+img_id = "ID_0b88b2f6d"
 
 image_loader = ImageLoader(train_pic_dir, train_mask_dir, csv_path)
 image_ = image_loader.visualize(img_id)
