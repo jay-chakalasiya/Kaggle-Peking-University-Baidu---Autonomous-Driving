@@ -37,7 +37,7 @@ class ImageLoader():
                 for car_data in pred_world_frame:
                     x, y, z = car_data[4], car_data[5], car_data[6]
                     pred_cam_frame_car = np.concatenate(
-                        (car_data[0:4], [x * self.fx / z + self.cx, y * self.fy / z + self.cy]), axis=None)
+                        (car_data[0:4], [x * self.fx / z + self.cx, y * self.fy / z + self.cy],car_data[4:7]), axis=None)
                     pred_cam_frame.append(pred_cam_frame_car)
                 self.prediction_data_cam_frame[img_id] = pred_cam_frame
 
@@ -48,9 +48,6 @@ class ImageLoader():
 
         print("self.prediction_data_cam_frame[img_id]", self.prediction_data_cam_frame[img_id])
         fontScale = 2
-        color = (255, 200, 100)
-        thickness = 3
-        font = cv.FONT_HERSHEY_SIMPLEX
         for car in self.prediction_data_cam_frame[img_id]:
             cars.append(car)
             img = cv.circle(img, (int(car[4])-50, int(car[5])), 10, (0, 255, 0), -1)
@@ -77,10 +74,10 @@ title_window = 'Compare_Photos'
 
 def on_trackbar(val):
     car = cars[val]
-    text = "1) "+ str(round(car[1], 2)) + "//" + str(round(car[2], 2)) + "//" + str(round(car[3], 2))
+    text = "1) "+ str(round(car[1], 2)) + "//" + str(round(car[2], 2)) + "//" + str(round(car[3], 2))+"||"+str(int(car[6]))+"//"+str(int(car[7]))+"//"+str(int(car[8]))
     car2 = cv.getTrackbarPos('Car2', title_window)
     car2 = cars[car2]
-    text2 = "2) "+str(round(car2[1], 2)) + "//" + str(round(car2[2], 2)) + "//" + str(round(car2[3], 2))
+    text2 = "2) "+str(round(car2[1], 2)) + "//" + str(round(car2[2], 2)) + "//" + str(round(car2[3], 2))+"||"+str(int(car2[6]))+"//"+str(int(car2[7]))+"//"+str(int(car2[8]))
     color = cv.getTrackbarPos('Color', title_window)
     color = (color,color,color)
     image_ = image_loader.visualize(img_id)
@@ -93,21 +90,11 @@ def on_trackbar(val):
     img = cv.putText(img, text, (100,100), font,
                       fontScale, color, thickness, cv.LINE_AA)
     cv.imshow(title_window, img)
-
 def on_trackbar2(val):
     color = (val, val, val)
 def on_trackbar3(val):
     val = cv.getTrackbarPos('Car', title_window)
     on_trackbar(val)
-
-
-#parser = argparse.ArgumentParser(description='Code for Adding a Trackbar to our applications tutorial.')
-#parser.add_argument('--input1', help='Path to the first input image.', default=path)
-#args = parser.parse_args()
-src1 = image_
-#if src1 is None:
-#    print('Could not open or find the image: ', args.input1)
-#    exit(0)
 
 cv.namedWindow(title_window,200)
 trackbar_name = "Car"
