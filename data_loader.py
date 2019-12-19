@@ -169,6 +169,14 @@ def draw_cube(img, keypoints):
   return img
 
 
+def walkthough_img(train_pic_dir, data_loader):
+  for subdir, dirs, files in os.walk(train_pic_dir):
+    for file_name in files:
+        img_id = file_name[0:-4]
+        data_loader.visualize(img_id)
+
+
+
 
 if __name__ == "__main__":
   train_pic_dir = "C:\\Users\\wenbo\\Downloads\\pku-autonomous-driving\\train_images\\"
@@ -177,8 +185,11 @@ if __name__ == "__main__":
   json_file_path = "C:\\Users\\wenbo\\workspace\\Kaggle-Peking-University-Baidu---Autonomous-Driving\\training_data.json"
 
   data_loader = DataLoader(train_pic_dir, train_mask_dir, csv_path, json_file_path)
-  data_loader.load_raw_data()
-  # data_loader.load_json_data()
+  # data_loader.load_raw_data()
+  data_loader.load_json_data()
 
 
   data_loader.visualize("ID_a381bf4d0")
+
+  # to see more, un-comment below, press any key to move to next image
+  # walkthough_img(train_pic_dir, data_loader)
