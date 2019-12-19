@@ -22,7 +22,7 @@ def rotation_matrix(yaw, pitch, roll):
 def nothing(a,b):
   return b
 
-class ImageLoader():
+class DataLoader():
   def __init__(self, img_dir, mask_dir, csv_path, json_file_path):
     self.img_dir = img_dir
     self.mask_dir = mask_dir
@@ -176,9 +176,9 @@ if __name__ == "__main__":
   csv_path = "C:\\Users\\wenbo\\Downloads\\pku-autonomous-driving\\train.csv"
   json_file_path = "C:\\Users\\wenbo\\workspace\\Kaggle-Peking-University-Baidu---Autonomous-Driving\\training_data.json"
 
-  image_loader = ImageLoader(train_pic_dir, train_mask_dir, csv_path, json_file_path)
-  image_loader.load_raw_data()
-  # image_loader.load_json_data()
+  data_loader = DataLoader(train_pic_dir, train_mask_dir, csv_path, json_file_path)
+  data_loader.load_raw_data()
+  # data_loader.load_json_data()
 
 
-  image_loader.visualize("ID_a381bf4d0")
+  data_loader.visualize("ID_a381bf4d0")
